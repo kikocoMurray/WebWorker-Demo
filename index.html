@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="calculate" value="button"/> 
+    <input type="text" name="input" id="number-input" />
+    <span id="result"></span>
+</body>
+    <script>
+        // 檢查瀏覽器有沒有支援 Web Workers
+        if (window.Worker) {
+        // 建立 worker instance
+        const worker = new Worker("src/worker.js");
+          worker.onmessage = (e) => {
+            const result = e.data;
+            console.log("Result is...", result);
+            const resultSpan = document.querySelector("#result");
+            resultSpan.innerHTML = result;
+          };
+          worker.onerror = (e) => {
+            console.log("error");
+          };
+        document.querySelector("#calculate").onclick = function () {
+            console.log("send number to web workers");
+            const number = document.querySelector("#number-input").value;
+            worker.postMessage(number);
+        };
+        }
+
+    </script>
+    <!-- <script src="./src/index.js"></script> -->
+</html>
