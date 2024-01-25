@@ -33,6 +33,7 @@
         document.querySelector("#calculate-js").onclick = function () {
           console.log("send number to web workers");
           const number = document.querySelector("#number-input-js").value;
+          console.log(new Date().getTime())
           workerJS.postMessage(number);
         };
 
@@ -50,6 +51,7 @@
         document.querySelector("#calculate-assembly").onclick = function () {
           console.log("send number to web workers");
           const number = document.querySelector("#number-input-assembly").value;
+          console.log(new Date().getTime());
           workerAssembly.postMessage(number);
         };
       }

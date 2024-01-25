@@ -17,6 +17,7 @@
   self.onmessage = (e) => {
     const number = e.data;
     const result = fibonacci(number);
+    console.log(new Date().getTime());
     self.postMessage(result);
   };
 })();

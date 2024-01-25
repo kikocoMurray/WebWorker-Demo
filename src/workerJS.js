@@ -1,6 +1,5 @@
 // worker.js
 const fibonacci = (n) => {
-  console.log("n", n);
   if (n <= 0) {
     return 0;
   }
@@ -15,5 +14,6 @@ const fibonacci = (n) => {
 self.onmessage = (e) => {
   const number = e.data;
   const result = fibonacci(number);
+  console.log(new Date().getTime());
   self.postMessage(result);
 };
