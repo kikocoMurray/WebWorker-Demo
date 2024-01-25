@@ -32,7 +32,6 @@ jobs:
       - name: Install and Build
         run: |
           yarn install
-          yarn build
           yarn asbuild
         env:
           VITE_OWNER: ${{ secrets.VITE_OWNER }}
