@@ -1,6 +1,6 @@
 // worker.js
 const fibonacci = (n) => {
-  console.log(n);
+  console.log("n", n);
   if (n <= 0) {
     return 0;
   }

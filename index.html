@@ -6,31 +6,52 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="button" id="calculate" value="button"/> 
-    <input type="text" name="input" id="number-input" />
-    <span id="result"></span>
+    <h2>worker js</h2>
+    <input type="button" id="calculate-js" value="button"/> 
+    <input type="text" name="input" id="number-input-js" />
+    <span id="result-js"></span>
+    
+    <h2>worker assembly</h2>
+    <input type="button" id="calculate-assembly" value="button"/> 
+    <input type="text" name="input" id="number-input-assembly" />
+    <span id="result-assembly"></span>
 </body>
-    <script>
-        // 檢查瀏覽器有沒有支援 Web Workers
-        if (window.Worker) {
+    <script >
+      // 檢查瀏覽器有沒有支援 Web Workers
+      if (window.Worker) {
         // 建立 worker instance
-        const worker = new Worker("src/worker.js");
-          worker.onmessage = (e) => {
-            const result = e.data;
-            console.log("Result is...", result);
-            const resultSpan = document.querySelector("#result");
-            resultSpan.innerHTML = result;
-          };
-          worker.onerror = (e) => {
-            console.log("error");
-          };
-        document.querySelector("#calculate").onclick = function () {
-            console.log("send number to web workers");
-            const number = document.querySelector("#number-input").value;
-            worker.postMessage(number);
+        const workerJS = new Worker("src/workerJS.js");
+        workerJS.onmessage = (e) => {
+          const result = e.data;
+          console.log("Result is...", result);
+          const resultSpan = document.querySelector("#result-js");
+          resultSpan.innerHTML = result;
         };
-        }
+        workerJS.onerror = (e) => {
+          console.log("error");
+        };
+        document.querySelector("#calculate-js").onclick = function () {
+          console.log("send number to web workers");
+          const number = document.querySelector("#number-input-js").value;
+          workerJS.postMessage(number);
+        };
 
+        const workerAssembly = new Worker("src/workerAssembly.js");
+        workerAssembly.onmessage = (e) => {
+          const result = e.data;
+          console.log("Result is...", result);
+          const resultSpan = document.querySelector("#result-assembly");
+          resultSpan.innerHTML = result;
+        };
+        workerAssembly.onerror = (e) => {
+          console.log("error");
+        };
+
+        document.querySelector("#calculate-assembly").onclick = function () {
+          console.log("send number to web workers");
+          const number = document.querySelector("#number-input-assembly").value;
+          workerAssembly.postMessage(number);
+        };
+      }
     </script>
-    <!-- <script src="./src/index.js"></script> -->
 </html>
