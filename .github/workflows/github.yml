@@ -37,7 +37,7 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Print directory structure
         run: |
-          ls -R
+          ls
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
